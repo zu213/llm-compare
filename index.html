@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+
+<head>
+
+</head>
+
+<body>
+
+  <div class="tabs">
+    <button data-tab="CHATGPT">GPT</button>
+    <button data-tab="DEEPSEEK">DEEPSEEK</button>
+    <button data-tab="CLAUDE">CLAUDE</button>
+    <button data-tab="GEMINI">GEMINI</button>
+  </div>
+  <div id="currentTab">
+    <div id="currentTab__name">
+
+    </div>
+    <div id="currentTab__input">
+      <input id="currentTab__input--input" placeholder="type promt here..."></input>
+    </div>
+    <div id="currentTab__content">
+      
+    </div>
+
+    <div>
+      <div id="currentTab_apiKeySubmitted">
+      </div>
+      <form id="currentTab__apiForm">
+        <input id="currentTab__apiForm--input" placeholder="api key here"></input>
+        <button type="submit">Submit</button>
+      </form>
+      <div>
+        <a id="currentTab__apiLink" href="">find your key here</a>
+      </div>
+    </div>
+  </div>
+
+  <button id="requestButton">Submit prompt</button>
+  <script type="module" src="./app.js"></script> 
+
+</body>
