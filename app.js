@@ -14,15 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
   for(const llm of Object.keys(llms)){
     llms[llm].key = localStorage.getItem(llm);
   }
-  document.getElementById('currentTab__name').innerText = activeTab
-  document.getElementById('currentTab__apiLink').href = llms[activeTab].helpLink
-  document.getElementById('currentTab_apiKeySubmitted').innerText = llms[activeTab].key ? 'existing key submitted' : 'no key submitted yet'
+  document.getElementById('current-tab__name').innerText = activeTab
+  document.getElementById('api-key-form__apiLink').href = llms[activeTab].helpLink
+  document.getElementById('api-key-form_apiKeySubmitted').innerText = llms[activeTab].key ? 'existing key submitted' : 'no key submitted yet'
   const tabButtons = document.querySelectorAll('.tabs button');
   
   tabButtons.forEach(button => {
     button.addEventListener('click', () => {
       activeTab = button.dataset.tab;
-      document.getElementById("currentTab__input--input").addEventListener("keydown", async (e) => {
+      document.getElementById("current-tab__input--input").addEventListener("keydown", async (e) => {
         //makeModelRequest();
         if(e.keyCode === 13){
           e.preventDefault(); // Ensure it is only this code that runs
@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         console.log(e)
       });
-      document.getElementById('currentTab__name').innerText = activeTab
-      document.getElementById('currentTab__apiLink').href = llms[activeTab].helpLink
-      document.getElementById('currentTab_apiKeySubmitted').innerText = llms[activeTab].key ? 'existing key submitted' : 'no key submitted yet'
+      document.getElementById('current-tab__name').innerText = activeTab
+      document.getElementById('api-key-form__apiLink').href = llms[activeTab].helpLink
+      document.getElementById('api-key-form_apiKeySubmitted').innerText = llms[activeTab].key ? 'existing key submitted' : 'no key submitted yet'
     });
   });
 
@@ -42,10 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
     makeModelRequest();
   });
 
-  const form = document.getElementById('currentTab__apiForm');
+  const form = document.getElementById('api-key-form__apiForm');
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const apiKey = document.getElementById('currentTab__apiForm--input').value;
+    const apiKey = document.getElementById('api-key-form__apiForm--input').value;
     setApiKey(activeTab, apiKey);
   });
 });
@@ -57,9 +57,9 @@ function setApiKey(llm, key) {
 
 async function makeModelRequest() {
   if (activeTab) {
-    const queryInputElement = document.getElementById('currentTab__input--input');
+    const queryInputElement = document.getElementById('current-tab__input--input');
     if(!llms[activeTab].key || !queryInputElement.value){
-      //document.getElementById('currentTab__content').innerText = `please insert you're api key for ${activeTab}`
+      //document.getElementById('current-tab__content').innerText = `please insert you're api key for ${activeTab}`
       return
     }
 
@@ -67,7 +67,7 @@ async function makeModelRequest() {
     // Content should be a HTML string
     console.log(queryInputElement.value)
     const content = await activeLLM.fnc(activeLLM.key, queryInputElement.value)
-    const contentElement = document.getElementById('currentTab__content')
+    const contentElement = document.querySelector('.current-tab__content')
     contentElement.innerHTML = `${contentElement.innerHTML}<div>${queryInputElement.value}</div> <div>${content}</div>`
     llms[activeTab].convo.user += ''
     llms[activeTab].convo.bot += ''

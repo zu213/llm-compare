@@ -2,6 +2,7 @@
 
 
 <head>
+  <link rel="stylesheet" href="app.css">
 
 </head>
 
@@ -13,31 +14,35 @@
     <button data-tab="CLAUDE">CLAUDE</button>
     <button data-tab="GEMINI">GEMINI</button>
   </div>
-  <div id="currentTab">
-    <div id="currentTab__name">
+  <div id="current-tab">
+    <div id="current-tab__name">
 
     </div>
-    <div id="currentTab__input">
-      <input id="currentTab__input--input" placeholder="type promt here..."></input>
-    </div>
-    <div id="currentTab__content">
+    
+    <div class="current-tab__content">
       
     </div>
 
-    <div>
-      <div id="currentTab_apiKeySubmitted">
-      </div>
-      <form id="currentTab__apiForm">
-        <input id="currentTab__apiForm--input" placeholder="api key here"></input>
-        <button type="submit">Submit</button>
-      </form>
-      <div>
-        <a id="currentTab__apiLink" href="">find your key here</a>
-      </div>
+    <div id="current-tab__input">
+      <input id="current-tab__input--input" placeholder="type promt here..."></input>
     </div>
   </div>
 
   <button id="requestButton">Submit prompt</button>
-  <script type="module" src="./app.js"></script> 
 
+  <div class="api-key-form">
+    <div id="api-key-form_apiKeySubmitted">
+    </div>
+    <form id="api-key-form__apiForm">
+      <label>Submit your api key here: </label>
+      <input id="api-key-form__apiForm--input" placeholder="api key here"></input>
+      <button type="submit">Submit</button>
+    </form>
+    <div>
+      <a id="api-key-form__apiLink" href="">find your key here</a>
+    </div>
+  </div>
+
+
+  <script type="module" src="./app.js"></script>
 </body>

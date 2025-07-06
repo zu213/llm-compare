@@ -1,0 +1,15 @@
+.current-tab__content {
+  height: 50vh;
+  width: 100%;
+  background-color: rgb(225, 225, 225);
+  border-radius: 10px;
+}
+
+.api-key-form {
+  margin: 10px;
+  border: 2px solid gray;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/*# sourceMappingURL=app.css.map */
