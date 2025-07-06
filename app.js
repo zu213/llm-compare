@@ -4,10 +4,10 @@ import { reqChatGPT, reqClaude, reqDeepSeek, reqGemini } from './bridge.js'
 // State variable to keep track of active tab
 let activeTab = "CHATGPT";
 let llms = {
-  "CHATGPT": {key: null, fnc: reqChatGPT, helpLink: 'https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key'},
-  "DEEPSEEK": {key: null, fnc: reqDeepSeek},
-  "CLAUDE": {key: null, fnc: reqClaude},
-  "GEMINI": {key: null, fnc: reqGemini, helpLink: 'https://ai.google.dev/gemini-api/docs/pricing'},
+  "CHATGPT": {key: null, fnc: reqChatGPT, convo: {user: '', bot: ''}, helpLink: 'https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key'},
+  "DEEPSEEK": {key: null, fnc: reqDeepSeek, convo: {user: '', bot: ''}},
+  "CLAUDE": {key: null, fnc: reqClaude, convo: {user: '', bot: ''}},
+  "GEMINI": {key: null, fnc: reqGemini, convo: {user: '', bot: ''}, helpLink: 'https://ai.google.dev/gemini-api/docs/pricing'},
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,6 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
   tabButtons.forEach(button => {
     button.addEventListener('click', () => {
       activeTab = button.dataset.tab;
+      document.getElementById("currentTab__input--input").addEventListener("keydown", async (e) => {
+        //makeModelRequest();
+        if(e.keyCode === 13){
+          e.preventDefault(); // Ensure it is only this code that runs
+
+          await makeModelRequest()
+          alert("Enter was pressed was presses");
+        }
+        console.log(e)
+      });
       document.getElementById('currentTab__name').innerText = activeTab
       document.getElementById('currentTab__apiLink').href = llms[activeTab].helpLink
       document.getElementById('currentTab_apiKeySubmitted').innerText = llms[activeTab].key ? 'existing key submitted' : 'no key submitted yet'
@@ -47,17 +57,30 @@ function setApiKey(llm, key) {
 
 async function makeModelRequest() {
   if (activeTab) {
-    if(!llms[activeTab].key){
-      document.getElementById('currentTab__content').innerText = `please insert you're api key for ${activeTab}`
+    const queryInputElement = document.getElementById('currentTab__input--input');
+    if(!llms[activeTab].key || !queryInputElement.value){
+      //document.getElementById('currentTab__content').innerText = `please insert you're api key for ${activeTab}`
       return
     }
 
-    const query = document.getElementById('currentTab__input--input').value;
-
     const activeLLM = llms[activeTab]
-    const content = await activeLLM.fnc(activeLLM.key, query)
-    document.getElementById('currentTab__content').innerText = JSON.stringify(content)
+    // Content should be a HTML string
+    console.log(queryInputElement.value)
+    const content = await activeLLM.fnc(activeLLM.key, queryInputElement.value)
+    const contentElement = document.getElementById('currentTab__content')
+    contentElement.innerHTML = `${contentElement.innerHTML}<div>${queryInputElement.value}</div> <div>${content}</div>`
+    llms[activeTab].convo.user += ''
+    llms[activeTab].convo.bot += ''
+    queryInputElement.value = ''
   } else {
     alert('No tab selected yet.');
+  }
+}
+
+export function handleFormPress(e) {
+  if(e.keyCode === 13){
+    e.preventDefault(); // Ensure it is only this code that runs
+
+    alert("Enter was pressed was presses");
   }
 }

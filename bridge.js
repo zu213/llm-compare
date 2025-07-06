@@ -1,4 +1,5 @@
 
+var geminiQueryHistory = []
 
 export async function reqChatGPT(apiKey, query){
   try {
@@ -18,7 +19,6 @@ export async function reqChatGPT(apiKey, query){
     });
     if(response.ok){
       const data = await response.json();
-      console.log(data.choices[0].message.content);
       return data
     } else {
       console.log(response)
@@ -87,21 +87,19 @@ export async function reqGemini(apiKey, query){
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        contents: [
-          { parts: [ { text: `${query}`} ] }
-        ]
+        contents: geminiQueryHistory.concat([{ role: 'user', parts: [ { text: `${query}`} ] }])
       })
     })
     if(response.ok){
       const data = await response.json();
       const parts = data?.candidates[0]?.content?.parts
-      if(!parts){
-        return 'Error parts not found'
-      }
+      if(!parts) return 'Error parts not found'
       let finalText = ''
       for(const part of parts){
         finalText += part.text
       }
+      geminiQueryHistory.push([{ role: 'user', parts: [ { text: `${query}`} ] }])
+      geminiQueryHistory.push([{ role: 'model', parts: [ { text: `${finalText}`} ] }])
       return finalText
     } else {
       const data = await response.json()
@@ -109,5 +107,20 @@ export async function reqGemini(apiKey, query){
     }
   } catch(err){
     return(err)
+  }
+}
+
+export async function getHistory(model) {
+  switch (model) {
+    case 'CHATGPT':
+      break
+    case 'DEEPSEEK':
+      break
+    case 'CLAUDE':
+      break
+    case 'GEMINI':
+      return geminiQueryHistory.map(e => e.parts[0].text)
+    default:
+      return 'Unable to load this models history'
   }
 }
