@@ -6,7 +6,7 @@ let activeTab = "CHATGPT";
 let llms = {
   "CHATGPT": {key: null, fnc: reqChatGPT, convo: {user: '', bot: ''}, helpLink: 'https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key'},
   "DEEPSEEK": {key: null, fnc: reqDeepSeek, convo: {user: '', bot: ''}},
-  "CLAUDE": {key: null, fnc: reqClaude, convo: {user: '', bot: ''}},
+  "CLAUDE": {key: null, fnc: reqClaude, convo: {user: '', bot: ''}, helpLink: 'https://www.anthropic.com/api'},
   "GEMINI": {key: null, fnc: reqGemini, convo: {user: '', bot: ''}, helpLink: 'https://ai.google.dev/gemini-api/docs/pricing'},
 }
 
