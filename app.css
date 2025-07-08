@@ -11,6 +11,15 @@
 .current-tab {
   display: block;
 }
+.current-tab .chat__bot {
+  background-color: rgb(99, 98, 98);
+}
+.current-tab .chat__user {
+  background-color: rgb(209, 207, 207);
+}
+.current-tab .warning {
+  color: red;
+}
 
 .api-key-form {
   margin: 10px;

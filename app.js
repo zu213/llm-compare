@@ -92,15 +92,14 @@ async function makeModelRequests() {
       return
     }
     if(!llms[currentTab].key){
-      el.innerHTML = `${el.innerHTML}<div>${query}</div> <div>Invalid api key</div>`
+      el.innerHTML = `${el.innerHTML}<div class="chat__user">${query}</div> <div  class="chat__bot warning">Invalid api key</div>`
       return
     }
 
     const activeLLM = llms[currentTab]
     // Content should be a HTML string
-    return activeLLM.fnc(activeLLM.key, query).then((content) => {
-      console.log(content)
-      el.innerHTML = `${el.innerHTML}<div>${query}</div> <div>${content}</div>`
+    return activeLLM.fnc(activeLLM.key, query).then(({content, code}) => {
+      el.innerHTML = `${el.innerHTML}<div class="chat__user">${query}</div> <div class="chat__bot ${code == 1 ? 'warning': ''}">${content}</div>`
     })
   })
   await Promise.all(llmPromises).then(() => queryInputElement.value = '')

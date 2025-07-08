@@ -22,13 +22,13 @@ export async function reqChatGPT(apiKey, query){
       const finalText = data?.choices[0]?.message.content
       chatgptQueryHistory.push({ role: 'user',content: `${query}`})
       chatgptQueryHistory.push({ role: 'assistant', content: `${finalText}`})
-      return finalText
+      return {content: finalText, code: 0}
     } else {
-      const json = await response.json()
-      return json.error.message
+      const data = await response.json()
+      return {content: data.error?.message ?? 'No error found', code: 1}
     }
   } catch(err){
-    return(err)
+    return({content: err, code: 1})
   }
 }
 
@@ -51,13 +51,13 @@ export async function reqDeepSeek(apiKey, query){
       const finalText = data?.choices[0]?.message.content
       deepseekQueryHistory.push({ role: 'user',content: `${query}`})
       deepseekQueryHistory.push({ role: 'assistant', content: `${finalText}`})
-      return finalText
+      return {content: finalText, code: 0}
     } else {
       const data = await response.json()
-      return data.error?.message ?? 'No error found'
+      return {content: data.error?.message ?? 'No error found', code: 1}
     }
   } catch(err){
-    return(err)
+    return({content: err, code: 1})
   }
 }
 
@@ -82,13 +82,13 @@ export async function reqClaude(apiKey, query){
       const finalText = data?.content[0]?.text
       claudeQueryHistory.push({ role: 'user',content: `${query}`})
       claudeQueryHistory.push({ role: 'assistant', content: `${finalText}`})
-      return finalText
+      return {content: finalText, code: 0}
     } else {
       const data = await response.json()
-      return data.error?.message ?? 'No error found'
+      return {content: data.error?.message ?? 'No error found', code: 1}
     }
   } catch(err){
-    return(err)
+    return({content: err, code: 1})
   }
 }
 
@@ -113,13 +113,13 @@ export async function reqGemini(apiKey, query){
       }
       geminiQueryHistory.push([{ role: 'user', parts: [ { text: `${query}`} ] }])
       geminiQueryHistory.push([{ role: 'model', parts: [ { text: `${finalText}`} ] }])
-      return finalText
+      return {content: finalText, code: 0}
     } else {
       const data = await response.json()
-      return data.error?.message ?? 'No error found'
+      return {content: data.error?.message ?? 'No error found', code: 1}
     }
   } catch(err){
-    return(err)
+    return({content: err, code: 1})
   }
 }
 
