@@ -1,24 +1,71 @@
-.tab {
-  display: none;
 
-  &__content {
-    height: 50vh;
-    width: 100%;
+body {
+  font-family: 'Roboto', sans-serif;
+  padding: 0 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  background-color: rgb(247, 247, 247);
+  border-radius: 5px;
+  padding: 5px 10px;
+
+  &.active {
+    color: red;
     background-color: rgb(225, 225, 225);
-    border-radius: 10px;
   }
 }
 
-.current-tab {
-  display: block;
+.tabs {
+  left: 15px;
+  position: relative;
+  
+  button {
+    border: 1px solid black;
+    border-bottom: 0 solid black;
+    border-radius: 5px 5px 0 0;
+    padding: 2px 4px;
+  }
+}
 
-  .chat{
+.tab {
+  display: none;
+  margin: 0 5px 5px 5px;
+
+  &__content {
+    height: 70vh;
+    padding: 20px;
+    width: calc(100% - 40px);
+    background-color: rgb(225, 225, 225);
+    border-radius: 10px;
+    position: relative;
+    overflow: scroll;
+  }
+
+  .chat {
+
     &__bot{
       background-color: rgb(99, 98, 98);
-
+      text-align: left;
+      padding: 10px;
+      width: fit-content;
+      max-width: 40%;
+      border-radius: 5px;
+      word-wrap:break-word;
     }
     &__user {
       background-color: rgb(209, 207, 207);
+      text-align: right;
+      border-radius: 5px;
+      padding: 10px;
+      width: fit-content;
+      max-width: 40%;
+      position: relative;
+      margin-left: auto;
+      word-wrap:break-word;
     }
   }
 
@@ -27,19 +74,47 @@
   }
 }
 
-.api-key-form {
-  margin: 10px;
-  border: 2px solid gray;
-  padding: 5px;
-  border-radius: 10px;
+.current-tab {
+  display: block;
 }
 
-button {
-  &.active {
-    color: red;
+.prompt-input {
+  width: 80%;
+  min-height: 100px;
+  display: inline-block;
+  margin: 10px;
+  
+  &--input {
+    border-radius: 5px;
+    width: 100%;
   }
 }
 
-h1 {
-  text-align: center;
+.prompt-submit--button {
+  display: inline-block;
+  width: 17%;
+  vertical-align: middle;
+  transform: translate(0, -50%);
+}
+
+.api-key-form {
+  margin: 10px;
+  border: 2px solid gray;
+  padding: 10px;
+  border-radius: 10px;
+
+  &__apiForm {
+    &--input{
+      width: 60%;
+    }
+  }
+
+  &__apiKeySubmitted {
+    padding: 5px 0;
+    color: red;
+
+    &.healthy{
+      color: greenyellow;
+    }
+  }
 }

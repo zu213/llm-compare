@@ -3,6 +3,10 @@
 
 <head>
   <link rel="stylesheet" href="app.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"></noscript>
 </head>
 
 <body>
@@ -18,12 +22,12 @@
   </div>
 
   <div class="prompt-input">
-    <input class="prompt-input--input" placeholder="type promt here..."></input>
+    <textarea class="prompt-input--input" placeholder="type prompt here..." rows="3" cols="50"></textarea>
   </div>
   <button class="prompt-submit--button">Submit prompt</button>
 
   <div class="api-key-form">
-    <div class="api-key-form_apiKeySubmitted">
+    <div class="api-key-form__apiKeySubmitted">
     </div>
     <form class="api-key-form__apiForm">
       <label>Submit your api key here: </label>

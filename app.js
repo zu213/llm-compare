@@ -18,7 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // set initial values
   document.querySelector('.api-key-form__apiLink').href = llms[activeTab].helpLink
-  document.querySelector('.api-key-form_apiKeySubmitted').innerText = llms[activeTab].key ? 'existing key submitted' : 'no key submitted yet'
+  const keySubmittedEl = document.querySelector('.api-key-form__apiKeySubmitted')
+  keySubmittedEl.innerText = llms[activeTab].key ? 'Existing key submitted' : 'Invalid key submitted yet'
+  if(llms[activeTab].key) {
+    keySubmittedEl.classList.add('healthy')
+  } else {
+    keySubmittedEl.classList.remove('healthy')
+  }
   const tabButtons = document.querySelectorAll('.tabs button');
   const tabHolder = document.querySelector('.tab-holder')
 
@@ -72,7 +78,13 @@ function switchTab(activeTab){
     }
   })
   document.querySelector('.api-key-form__apiLink').href = llms[activeTab].helpLink
-  document.querySelector('.api-key-form_apiKeySubmitted').innerText = llms[activeTab].key ? 'existing key submitted' : 'no key submitted yet'
+  const keySubmittedEl = document.querySelector('.api-key-form__apiKeySubmitted')
+  keySubmittedEl.innerText = llms[activeTab].key ? 'Existing key submitted' : 'Invalid key submitted yet'
+  if(llms[activeTab].key) {
+    keySubmittedEl.classList.add('healthy')
+  } else {
+    keySubmittedEl.classList.remove('healthy')
+  }
 }
 
 function setApiKey(llm) {
@@ -92,14 +104,14 @@ async function makeModelRequests() {
       return
     }
     if(!llms[currentTab].key){
-      el.innerHTML = `${el.innerHTML}<div class="chat__user">${query}</div> <div  class="chat__bot warning">Invalid api key</div>`
+      el.innerHTML = `${el.innerHTML}<div markdown="1" class="chat__user">${query}</div> <div  class="chat__bot warning">Invalid api key</div>`
       return
     }
 
     const activeLLM = llms[currentTab]
     // Content should be a HTML string
     return activeLLM.fnc(activeLLM.key, query).then(({content, code}) => {
-      el.innerHTML = `${el.innerHTML}<div class="chat__user">${query}</div> <div class="chat__bot ${code == 1 ? 'warning': ''}">${content}</div>`
+      el.innerHTML = `${el.innerHTML}<div markdown="1" class="chat__user">${query}</div> <div class="chat__bot ${code == 1 ? 'warning': ''}">${content}</div>`
     })
   })
   await Promise.all(llmPromises).then(() => queryInputElement.value = '')
