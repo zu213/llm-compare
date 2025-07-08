@@ -3,43 +3,35 @@
 
 <head>
   <link rel="stylesheet" href="app.css">
-
 </head>
 
 <body>
-
+  <h1>LLM Compare</h1>
   <div class="tabs">
     <button data-tab="CHATGPT">GPT</button>
     <button data-tab="DEEPSEEK">DEEPSEEK</button>
     <button data-tab="CLAUDE">CLAUDE</button>
     <button data-tab="GEMINI">GEMINI</button>
   </div>
-  <div id="current-tab">
-    <div id="current-tab__name">
-
-    </div>
+  <div class="tab-holder">
     
-    <div class="current-tab__content">
-      
-    </div>
-
-    <div id="current-tab__input">
-      <input id="current-tab__input--input" placeholder="type promt here..."></input>
-    </div>
   </div>
 
-  <button id="requestButton">Submit prompt</button>
+  <div class="prompt-input">
+    <input class="prompt-input--input" placeholder="type promt here..."></input>
+  </div>
+  <button class="prompt-submit--button">Submit prompt</button>
 
   <div class="api-key-form">
-    <div id="api-key-form_apiKeySubmitted">
+    <div class="api-key-form_apiKeySubmitted">
     </div>
-    <form id="api-key-form__apiForm">
+    <form class="api-key-form__apiForm">
       <label>Submit your api key here: </label>
-      <input id="api-key-form__apiForm--input" placeholder="api key here"></input>
+      <input class="api-key-form__apiForm--input" placeholder="api key here"></input>
       <button type="submit">Submit</button>
     </form>
     <div>
-      <a id="api-key-form__apiLink" href="">find your key here</a>
+      <a class="api-key-form__apiLink" href="">find your key here</a>
     </div>
   </div>
 

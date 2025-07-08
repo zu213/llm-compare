@@ -24,7 +24,8 @@ export async function reqChatGPT(apiKey, query){
       chatgptQueryHistory.push({ role: 'assistant', content: `${finalText}`})
       return finalText
     } else {
-      return response
+      const json = await response.json()
+      return json.error.message
     }
   } catch(err){
     return(err)
@@ -70,17 +71,15 @@ export async function reqClaude(apiKey, query){
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'claude-opus-4-20250514',
+        model: 'claude-3-opus-20240229',
         max_tokens: 1024,
-        messages: [
-          claudeQueryHistory.concat({ role: 'user', content: `${query}`}),
-        ]
+        messages: claudeQueryHistory.concat({ role: 'user', content: `${query}`}),
       })
     })
 
     if(response.ok){
       const data = await response.json();
-      const finalText = data?.choices[0]?.message.content
+      const finalText = data?.content[0]?.text
       claudeQueryHistory.push({ role: 'user',content: `${query}`})
       claudeQueryHistory.push({ role: 'assistant', content: `${finalText}`})
       return finalText

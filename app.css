@@ -1,8 +1,15 @@
-.current-tab__content {
+.tab {
+  display: none;
+}
+.tab__content {
   height: 50vh;
   width: 100%;
   background-color: rgb(225, 225, 225);
   border-radius: 10px;
+}
+
+.current-tab {
+  display: block;
 }
 
 .api-key-form {
@@ -10,6 +17,14 @@
   border: 2px solid gray;
   padding: 5px;
   border-radius: 10px;
+}
+
+button.active {
+  color: red;
+}
+
+h1 {
+  text-align: center;
 }
 
 /*# sourceMappingURL=app.css.map */
