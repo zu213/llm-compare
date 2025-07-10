@@ -13,7 +13,7 @@ button {
   padding: 5px 10px;
 }
 button.active {
-  color: red;
+  color: rgb(160, 1, 1);
   background-color: rgb(225, 225, 225);
 }
 
@@ -33,7 +33,7 @@ button.active {
   margin: 0 5px 5px 5px;
 }
 .tab__content {
-  height: 70vh;
+  height: 60vh;
   padding: 20px;
   width: calc(100% - 40px);
   background-color: rgb(225, 225, 225);
@@ -42,7 +42,7 @@ button.active {
   overflow: scroll;
 }
 .tab .chat__bot {
-  background-color: rgb(99, 98, 98);
+  background-color: rgb(161, 161, 161);
   text-align: left;
   padding: 10px;
   width: fit-content;

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // set initial values
   document.querySelector('.api-key-form__apiLink').href = llms[activeTab].helpLink
   const keySubmittedEl = document.querySelector('.api-key-form__apiKeySubmitted')
-  keySubmittedEl.innerText = llms[activeTab].key ? 'Existing key submitted' : 'Invalid key submitted yet'
+  keySubmittedEl.innerText = llms[activeTab].key ? 'Existing key submitted' : 'No key submitted yet'
   if(llms[activeTab].key) {
     keySubmittedEl.classList.add('healthy')
   } else {
@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function switchTab(activeTab){
   document.querySelectorAll('.tabs button').forEach(button => {
     button.classList.remove('active')
-          console.log(activeTab)
     if(button.dataset.tab == activeTab) {
       button.classList.add('active')
     }
@@ -79,7 +78,7 @@ function switchTab(activeTab){
   })
   document.querySelector('.api-key-form__apiLink').href = llms[activeTab].helpLink
   const keySubmittedEl = document.querySelector('.api-key-form__apiKeySubmitted')
-  keySubmittedEl.innerText = llms[activeTab].key ? 'Existing key submitted' : 'Invalid key submitted yet'
+  keySubmittedEl.innerText = llms[activeTab].key ? 'Existing key submitted' : 'No key submitted yet'
   if(llms[activeTab].key) {
     keySubmittedEl.classList.add('healthy')
   } else {
@@ -88,7 +87,9 @@ function switchTab(activeTab){
 }
 
 function setApiKey(llm) {
-  const apiKey = document.querySelector('.api-key-form__apiForm--input').value;
+  const apiKeyEl = document.querySelector('.api-key-form__apiForm--input');
+  const apiKey = apiKeyEl.value
+  apiKeyEl.value = ''
   localStorage.setItem(llm, apiKey);
   llms[llm].key = apiKey;
 }

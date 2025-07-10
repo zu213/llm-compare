@@ -61,6 +61,7 @@ export async function reqDeepSeek(apiKey, query){
   }
 }
 
+ //** Doesn't work due to cors needs to be fired by backend */
 export async function reqClaude(apiKey, query){
   try{
     const response = await fetch('https://api.anthropic.com/v1/messages', {
